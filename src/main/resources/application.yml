@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: dabang-service
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    generate-ddl: true
+    defer-datasource-initialization: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:dabangdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  output:
+    ansi:
+      enabled: always
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  redis:
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 2
+    port: 16379
+    host: 127.0.0.1
+
+security:
+  secret: "dabang-security-41asdgjkn54o1i24104912i49013rojfl"
+  expiration: 3600000
+
+logging:
+  level:
+    logging.level.org.hibernate.type: trace
