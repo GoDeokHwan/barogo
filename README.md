@@ -21,6 +21,11 @@ cd ./docker/redis/; docker-compose up -d
 - 사용이유 :
   Token 저장 용도
 
+# 스웨거 연결
+
+- URL : http://localhost:8080/swagger-ui.html
+
+
 # 과제 순서
 전제조건 (1) : 회원 가입 API를 구현해 주세요.
 1. 회원가입시 필요한 정보는 ID, 비밀번호, 사용자 이름 입니다.
