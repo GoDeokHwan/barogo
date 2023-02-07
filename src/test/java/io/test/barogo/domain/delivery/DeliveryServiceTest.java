@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
@@ -31,5 +35,11 @@ public class DeliveryServiceTest {
         DeliveryCreateRequest request = DeliveryCreateRequest.of(1L, "서울시 강남구");
         DeliveryDTO delivery = deliveryService.create(request);
         assertEquals(delivery.getAddress(), "서울시 강남구");
+    }
+
+    @Test
+    void 계정에_해당_하는_배달_조회() {
+        List<DeliveryDTO> deliveryList = deliveryService.search(1L, LocalDate.of(2023, 2,7), LocalDate.of(2023, 2,8));
+        assertEquals(2, deliveryList.size());
     }
 }

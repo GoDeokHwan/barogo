@@ -43,7 +43,7 @@ public class Delivery {
     @JoinColumn(name = "accounts_id", referencedColumnName = "id")
     private Accounts accounts;
 
-    @Column(length = 10)
+    @Column(length = 15)
     @Comment("배달상태")
     @Enumerated(value = EnumType.STRING)
     private DeliveryStatus status;

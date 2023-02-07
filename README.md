@@ -78,8 +78,39 @@ Response :
 ```
 
 전제조건 (3) : 배달 조회 API 를 구현해 주세요.
-1.	배달 조회 시 필요한 정보는 기간 입니다. (기간은 최대 3일)
-2.	기간 내에 사용자가 주문한 배달의 리스트를 제공합니다.
+1. 배달 조회 시 필요한 정보는 기간 입니다. (기간은 최대 3일)
+2. 기간 내에 사용자가 주문한 배달의 리스트를 제공합니다.
+
+=> 
+
+URL : GET http://localhost:8080/api/accounts/1/delivery?startDate=2023-02-07&endDate=2023-02-09
+
+Response :
+```
+[
+    {
+        "id": 1,
+        "requestTime": "2023-02-07 12:58:57",
+        "endTime": "2023-02-08 01:58:57",
+        "address": "서울시 천호구",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 2,
+        "requestTime": "2023-02-08 12:58:57",
+        "endTime": null,
+        "address": "서울시 천호구",
+        "status": "IN_DELIVERY"
+    },
+    {
+        "id": 3,
+        "requestTime": "2023-02-09 12:58:57",
+        "endTime": null,
+        "address": "서울시 천호구",
+        "status": "WAITING"
+    }
+]
+```
 
 전제조건 (4) : 배달 주문 수정 API (도착지 주소 변경) 를 구현해 주세요.
 1.	사용자로부터 도착지 주소를 요청 받아 처리합니다.
