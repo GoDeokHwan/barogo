@@ -1,5 +1,6 @@
 package io.test.barogo.config.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.test.barogo.config.properties.SecurityProperties;
 import io.test.barogo.config.redis.RedisPublisher;
 import io.test.barogo.config.redis.RedisSubscriber;
@@ -36,7 +37,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
     private final SecurityProperties securityProperties;
-    private final AccountsService accountsService;
+    private final ObjectMapper objectMapper;
     private final PrincipalDetailsService principalDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final CustomLogoutHandler logoutHandler;
@@ -68,7 +69,7 @@ public class WebSecurityConfig {
     }
 
     public JwtAuthenticationFilter getJwtAuthenticationFilter() throws Exception {
-        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(securityProperties, redisPublisher);
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(securityProperties, redisPublisher, objectMapper);
         filter.setAuthenticationManager(authenticationManager(authenticationConfiguration));
         return filter;
     }

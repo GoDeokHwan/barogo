@@ -18,16 +18,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final SecurityProperties securityProperties;
     private final RedisPublisher redisPublisher;
+    private final ObjectMapper objectMapper;
 
 
-    public JwtAuthenticationFilter(SecurityProperties securityProperties, RedisPublisher redisPublisher) {
+    public JwtAuthenticationFilter(SecurityProperties securityProperties, RedisPublisher redisPublisher, ObjectMapper objectMapper) {
         this.securityProperties = securityProperties;
         this.redisPublisher = redisPublisher;
+        this.objectMapper = objectMapper;
         setFilterProcessesUrl("/api/login");
     }
 
@@ -63,5 +67,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         redisPublisher.publish(RedisTopicContact.getTopic(loginId), jwtToken, RedisTopicContact.getOneHourTime());
 
         response.addHeader("token", jwtToken);
+        Map<String, String> body = new HashMap<>();
+        body.put("AccessToken", jwtToken);
+        String bodyStr = objectMapper.writeValueAsString(body);
+        response.getWriter().write(bodyStr);
     }
 }
