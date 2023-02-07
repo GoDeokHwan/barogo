@@ -95,7 +95,20 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/api/login", "/api/accounts/join").permitAll().anyRequest().authenticated().and().formLogin().disable().csrf().disable().headers().disable().httpBasic().disable().rememberMe().disable().logout().logoutUrl("/api/logout").addLogoutHandler(logoutHandler).logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK)).permitAll().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling().accessDeniedHandler(accessDeniedHandler()).authenticationEntryPoint(authenticationEntryPoint()).and().addFilter(getJwtAuthenticationFilter()).addFilterBefore(getJwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http
+                .authorizeRequests()
+                .antMatchers("/api/login", "/api/accounts/join")
+                .permitAll().anyRequest().authenticated()
+                .and().formLogin().disable()
+                .csrf().disable()
+                .headers().disable()
+                .httpBasic().disable()
+                .rememberMe().disable()
+                .logout().logoutUrl("/api/logout").addLogoutHandler(logoutHandler)
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK)).permitAll()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler()).authenticationEntryPoint(authenticationEntryPoint())
+                .and().addFilter(getJwtAuthenticationFilter()).addFilterBefore(getJwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
