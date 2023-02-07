@@ -30,6 +30,7 @@ public class GlobalExceptionHandler {
             message.append("]");
             ex = ErrorResponse.of(ErrorCode.BAD_REQUEST, message.toString());
         } else {
+            log.error(e.getMessage(), e);
             ex = ErrorResponse.of(ErrorCode.SERVER_ERROR);
         }
         return ResponseEntity

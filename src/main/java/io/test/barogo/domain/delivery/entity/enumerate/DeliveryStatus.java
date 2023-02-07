@@ -13,4 +13,8 @@ public enum DeliveryStatus {
     DeliveryStatus(String label) {
         this.label = label;
     }
+
+    public boolean isWaiting() {
+        return this.equals(WAITING);
+    }
 }

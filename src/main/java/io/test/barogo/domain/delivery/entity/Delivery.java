@@ -4,6 +4,8 @@ import io.test.barogo.domain.accounts.entity.Accounts;
 import io.test.barogo.domain.delivery.entity.dto.DeliveryDTO;
 import io.test.barogo.domain.delivery.entity.dto.DeliveryWithAccountsDTO;
 import io.test.barogo.domain.delivery.entity.enumerate.DeliveryStatus;
+import io.test.barogo.support.ErrorCode;
+import io.test.barogo.support.ErrorResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -67,5 +69,13 @@ public class Delivery {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return mapper.map(this, DeliveryWithAccountsDTO.class);
+    }
+
+    public void updateAddress(String address) {
+        if (getStatus().isWaiting()) {
+            this.address = address;
+        } else {
+            throw ErrorResponse.of(ErrorCode.IS_DELIVERY_NOT_WAITING);
+        }
     }
 }

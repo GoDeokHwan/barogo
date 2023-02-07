@@ -2,6 +2,7 @@ package io.test.barogo.domain.delivery.service.impl;
 
 import io.test.barogo.domain.accounts.entity.Accounts;
 import io.test.barogo.domain.accounts.repository.AccountsRepository;
+import io.test.barogo.domain.delivery.controller.request.DeliveryAddressModifyRequest;
 import io.test.barogo.domain.delivery.controller.request.DeliveryCreateRequest;
 import io.test.barogo.domain.delivery.entity.Delivery;
 import io.test.barogo.domain.delivery.entity.dto.DeliveryDTO;
@@ -40,5 +41,13 @@ public class DeliveryServiceImpl implements DeliveryService {
                 .stream()
                 .map(Delivery::toDeliveryDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public DeliveryDTO modifyAddress(Long id, DeliveryAddressModifyRequest request) {
+        Delivery delivery = deliveryRepository.findById(id)
+                .orElseThrow(() -> ErrorResponse.of(ErrorCode.BAD_REQUEST));
+        delivery.updateAddress(request.getAddress());
+        return delivery.toDeliveryDTO();
     }
 }

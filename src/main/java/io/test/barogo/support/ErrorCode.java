@@ -13,8 +13,10 @@ public enum ErrorCode {
 
     // 404
     , NOT_FOUND_ACCOUNTS(HttpStatus.NOT_FOUND, "계정을 찾을 수 없습니다.")
+    , NOT_FOUND_DELIVERY(HttpStatus.NOT_FOUND, "배달을 찾을 수 없습니다.")
 
     , IS_FORBIDDEN_ACCOUTS(HttpStatus.FORBIDDEN, "계정이 존재합니다.")
+    , IS_DELIVERY_NOT_WAITING(HttpStatus.FORBIDDEN, "배달 준비중만 주소가 변경이 가능합니다.")
     // 401
     , UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "권한이 없습니다.")
     ;

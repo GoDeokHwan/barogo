@@ -116,3 +116,24 @@ Response :
 1.	사용자로부터 도착지 주소를 요청 받아 처리합니다.
 2.	사용자가 변경 가능한 배달인 경우에만 수정이 가능합니다.
 
+=>
+
+URL : PATCH http://localhost:8080/api/delivery/3
+
+Request 예시 :
+```
+{
+    "address":"광주광역시"
+}
+```
+
+Response 예시 :
+```
+{
+    "id": 3,
+    "requestTime": "2023-02-09 12:58:57",
+    "endTime": null,
+    "address": "광주광역시",
+    "status": "WAITING"
+}
+```
