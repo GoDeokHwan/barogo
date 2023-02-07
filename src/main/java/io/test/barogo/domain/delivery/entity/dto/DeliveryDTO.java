@@ -14,15 +14,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class DeliveryDTO {
     @ApiModelProperty(value = "배달 ID", example = "1")
-    private Long id;
+    protected Long id;
     @ApiModelProperty(value = "배달시작시간", example = "2023-02-06 12:00:00")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime requestTime;
+    protected LocalDateTime requestTime;
     @ApiModelProperty(value = "배달완료시간", example = "2023-02-06 12:00:00")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime endTime;
+    protected LocalDateTime endTime;
     @ApiModelProperty(value = "배달 주소", example = "서울특별시 그짝")
-    private String address;
+    protected String address;
     @ApiModelProperty(value = "배달상태", example = "COMPLETED")
-    private DeliveryStatus status;
+    protected DeliveryStatus status;
 }

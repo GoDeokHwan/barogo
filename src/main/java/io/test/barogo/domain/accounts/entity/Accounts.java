@@ -37,10 +37,6 @@ public class Accounts {
     @Comment("패스워드")
     private String password;
 
-    @Column(length = 500)
-    @Comment("주소")
-    private String address;
-
     @Comment("배달 현황")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accounts")
     private Set<Delivery> deliveries = new HashSet<>();

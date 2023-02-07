@@ -8,10 +8,10 @@ public enum ErrorCode {
     // 500
     SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "시스템 오류 발생")
 
-    // 404
+    // 400
     , BAD_REQUEST(HttpStatus.BAD_REQUEST, "파라미터가 이상합니다.")
 
-    // 405
+    // 404
     , NOT_FOUND_ACCOUNTS(HttpStatus.NOT_FOUND, "계정을 찾을 수 없습니다.")
 
     , IS_FORBIDDEN_ACCOUTS(HttpStatus.FORBIDDEN, "계정이 존재합니다.")
