@@ -7,6 +7,7 @@ import io.test.barogo.domain.delivery.repository.DeliveryRepositoryCustom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static io.test.barogo.domain.delivery.entity.QDelivery.delivery;
 import static io.test.barogo.domain.accounts.entity.QAccounts.accounts;
@@ -28,5 +29,16 @@ public class DeliveryRepositoryCustomImpl implements DeliveryRepositoryCustom {
                         .and(delivery.requestTime.between(startDate, endDate))
                 )
                 .fetch();
+    }
+
+    @Override
+    public Optional<Delivery> findByIdWithAccounts(Long id) {
+        return Optional.ofNullable(
+                (Delivery) jpaQueryFactory
+                        .from(delivery)
+                        .join(delivery.accounts, accounts).fetchJoin()
+                        .where(delivery.id.eq(id))
+                        .fetchOne()
+        );
     }
 }

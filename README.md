@@ -118,8 +118,7 @@ Response :
 
 =>
 
-URL : PATCH http://localhost:8080/api/delivery/3
-
+URL : PATCH http://localhost:8080/api/accounts/1/delivery/3/address
 Request 예시 :
 ```
 {

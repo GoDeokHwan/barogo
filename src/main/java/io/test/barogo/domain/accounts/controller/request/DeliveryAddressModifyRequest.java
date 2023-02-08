@@ -1,4 +1,4 @@
-package io.test.barogo.domain.delivery.controller.request;
+package io.test.barogo.domain.accounts.controller.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -4,6 +4,7 @@ import io.swagger.annotations.*;
 import io.test.barogo.domain.accounts.controller.request.JoinRequest;
 import io.test.barogo.domain.accounts.entity.dto.AccountsDTO;
 import io.test.barogo.domain.accounts.service.AccountsService;
+import io.test.barogo.domain.accounts.controller.request.DeliveryAddressModifyRequest;
 import io.test.barogo.domain.delivery.entity.dto.DeliveryDTO;
 import io.test.barogo.domain.delivery.service.DeliveryService;
 import io.test.barogo.support.ErrorCode;
@@ -65,6 +66,24 @@ public class AccountsController {
         if (endDate.compareTo(starDate) > 3) {
             throw ErrorResponse.of(ErrorCode.BAD_REQUEST);
         }
+    }
+
+    @ApiOperation(value = "배달 주소 수정"
+            , response = DeliveryDTO.class
+            , notes = "배달 주소 수정 API"
+    )
+    @ApiResponses({
+            @ApiResponse(code = 401, message = "파라미터 부족"),
+            @ApiResponse(code = 403, message = "배달을 찾을 수 없습니다."),
+            @ApiResponse(code = 403, message = "자신의 주문한 배달이 아닙니다.")
+    })
+    @PatchMapping("/{accountsId}/delivery/{deliveryId}/address")
+    public ResponseEntity modifyAddress(
+            @ApiParam(value = "계정ID", required = true, example = "1") @PathVariable Long accountsId,
+            @ApiParam(value = "배달ID", required = true, example = "1") @PathVariable Long deliveryId,
+            @ApiParam(value = "배달 주소 변경 Request") @Valid @RequestBody DeliveryAddressModifyRequest request
+    ) {
+        return ResponseEntity.ok(deliveryService.modifyAddress(accountsId, deliveryId, request));
     }
 
 }
