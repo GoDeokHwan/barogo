@@ -18,6 +18,7 @@ public enum ErrorCode {
     , IS_FORBIDDEN_ACCOUTS(HttpStatus.FORBIDDEN, "계정이 존재합니다.")
     , IS_DELIVERY_NOT_WAITING(HttpStatus.FORBIDDEN, "배달 준비중만 주소가 변경이 가능합니다.")
     , IS_ACCOUNTS_DELIVERY(HttpStatus.FORBIDDEN, "자신의 주문한 배달이 아닙니다.")
+    , DELIVERY_STATUS_ERROR(HttpStatus.FORBIDDEN, "변경 할 수 없는 상태입니다.")
     // 401
     , UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "권한이 없습니다.")
     ;

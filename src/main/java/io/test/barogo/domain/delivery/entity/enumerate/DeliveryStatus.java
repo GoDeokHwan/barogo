@@ -17,4 +17,14 @@ public enum DeliveryStatus {
     public boolean isWaiting() {
         return this.equals(WAITING);
     }
+
+
+    public boolean isInDelivery() {
+        return this.equals(IN_DELIVERY);
+    }
+
+
+    public boolean isCompleted() {
+        return this.equals(COMPLETED);
+    }
 }

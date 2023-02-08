@@ -78,4 +78,18 @@ public class Delivery {
             throw ErrorResponse.of(ErrorCode.IS_DELIVERY_NOT_WAITING);
         }
     }
+
+    public void updateStatus(DeliveryStatus deliveryStatus) {
+        if (deliveryStatus.isWaiting()) {
+            // TODO 일단 허용
+            this.status = deliveryStatus;
+        } else if(deliveryStatus.isInDelivery() && this.getStatus().isWaiting()) {
+            this.status = DeliveryStatus.IN_DELIVERY;
+        } else if (deliveryStatus.isCompleted() && this.getStatus().isInDelivery()) {
+            this.status = DeliveryStatus.COMPLETED;
+            this.endTime = LocalDateTime.now();
+        } else {
+            throw ErrorResponse.of(ErrorCode.DELIVERY_STATUS_ERROR);
+        }
+    }
 }

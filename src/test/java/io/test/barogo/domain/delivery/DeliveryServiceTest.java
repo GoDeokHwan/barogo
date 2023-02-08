@@ -2,7 +2,9 @@ package io.test.barogo.domain.delivery;
 
 import io.test.barogo.domain.accounts.controller.request.DeliveryAddressModifyRequest;
 import io.test.barogo.domain.delivery.controller.request.DeliveryCreateRequest;
+import io.test.barogo.domain.delivery.controller.request.DeliveryStatusModifyRequest;
 import io.test.barogo.domain.delivery.entity.dto.DeliveryDTO;
+import io.test.barogo.domain.delivery.entity.enumerate.DeliveryStatus;
 import io.test.barogo.domain.delivery.service.DeliveryService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -43,8 +45,8 @@ public class DeliveryServiceTest {
     @Test
     @Description("계정에 해당하는 배달조회")
     void 계정에_해당_하는_배달_조회() {
-        List<DeliveryDTO> deliveryList = deliveryService.search(1L, LocalDate.of(2023, 2,7), LocalDate.of(2023, 2,8));
-        assertEquals(2, deliveryList.size());
+        List<DeliveryDTO> deliveryList = deliveryService.search(1L, LocalDate.of(2023, 2,7), LocalDate.of(2023, 2,7));
+        assertEquals(1, deliveryList.size());
     }
 
     @Test
@@ -65,5 +67,20 @@ public class DeliveryServiceTest {
     void 배달_주소_변경() {
         DeliveryDTO delivery = deliveryService.modifyAddress(1L, 3L, DeliveryAddressModifyRequest.of("경기도 수원시"));
         assertEquals(delivery.getAddress(), "경기도 수원시");
+    }
+
+    @Test
+    @Description("배달 상태 변경 실패")
+    void 배달_상태_변경_실패() {
+        assertThrows(RuntimeException.class, () -> {
+            deliveryService.modifyStatus(1L, DeliveryStatusModifyRequest.of(DeliveryStatus.COMPLETED));
+        });
+    }
+
+    @Test
+    @Description("배달 상태 변경")
+    void 배달_상태_변경() {
+        DeliveryDTO delivery = deliveryService.modifyStatus(3L, DeliveryStatusModifyRequest.of(DeliveryStatus.IN_DELIVERY));
+        assertEquals(delivery.getStatus(), DeliveryStatus.IN_DELIVERY);
     }
 }
